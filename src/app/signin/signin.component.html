@@ -1,0 +1,21 @@
+<FlexboxLayout class="page">
+        <StackLayout class="form">
+                <StackLayout class="input-field">
+                        <TextField class="input" hint="Name" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                    </StackLayout>
+
+                <StackLayout class="input-field">
+                        <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                    </StackLayout>
+
+                <StackLayout class="input-field">
+                  <TextField hint="Password" class="input"></TextField>
+                </StackLayout>
+
+                <StackLayout class="input-field">
+                        <TextField hint="Repeat Password" class="input"></TextField>
+                      </StackLayout>
+
+                <Button text="Sign In" class="btn btn-primary" (tap)="signin()"></Button>
+        </StackLayout>
+        </FlexboxLayout>

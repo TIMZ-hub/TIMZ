@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "904116319393",
+    "firebase_url": "https://timz-28fee.firebaseio.com",
+    "project_id": "timz-28fee",
+    "storage_bucket": "timz-28fee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904116319393:android:962ce356113c89f2b1ece0",
+        "android_client_info": {
+          "package_name": "org.nativescript.TimzAlpha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904116319393-lv9rom51372atttngd88nkafhrfj63p6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN9bLqiPT19YkwnEBU2dIKy4jPWBX8jZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904116319393-lv9rom51372atttngd88nkafhrfj63p6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "904116319393-4e9ss9f0ighgh655qn10v9pf8o377tqa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.TimzAlpha"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
