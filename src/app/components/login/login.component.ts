@@ -12,7 +12,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { SnackBar } from "nativescript-snackbar";
-import * as ApplicationSettings from "application-settings";
+const applicationSettings = require('tns-core-modules/application-settings');
 import {FirebaseService} from '../../services/firebase.service';
 import {User} from '../../models/user.model';
 @Component({
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     }
 
     public ngOnInit() {
-        if(ApplicationSettings.getBoolean("authenticated", false)) {
+        if(applicationSettings.getBoolean("authenticated", false)) {
             this.router.navigate(["/home"], { clearHistory: true });
         }
     }
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = true;
-        ApplicationSettings.setBoolean("authenticated", true);
+        applicationSettings.setBoolean("authenticated", true);
         this.router.navigate(["/home"], { clearHistory: true } );
 
       })

@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { Location } from "@angular/common";
-import * as ApplicationSettings from "application-settings";
-import {FirebaseService} from '../../services/firebase.service';
+const applicationSettings = require('tns-core-modules/application-settings');import {FirebaseService} from '../../services/firebase.service';
 import {User} from '../../models/user.model';
 
 @Component({
