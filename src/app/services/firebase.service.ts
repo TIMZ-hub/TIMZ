@@ -1,4 +1,4 @@
-import firebase = require("nativescript-plugin-firebase");
+import * as firebase from "nativescript-plugin-firebase";
 import {Injectable, NgZone} from "@angular/core";
 import {User} from '../models/user.model';
 @Injectable()

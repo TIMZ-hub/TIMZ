@@ -1,8 +1,7 @@
 
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import * as applicationSettings from 'tns-core-modules/application-settings'
-
+const applicationSettings = require('tns-core-modules/application-settings');
 @Component({
     moduleId: module.id,
     selector: "RR-secure",

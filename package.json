@@ -22,6 +22,7 @@
     "@angular/router": "~8.2.0",
     "nativescript-angular": "~8.2.0",
     "nativescript-plugin-firebase": "^10.0.0",
+    "nativescript-snackbar": "^4.1.2",
     "nativescript-theme-core": "~1.0.6",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
