@@ -9,17 +9,9 @@
     vertical-align: middle;
   }
 
-  .sl{
-    opacity: 50%;
-  }
-  .scrollView{
-    background-image: url("res://timz.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  }
-  .footnote{
-    color: #D51A1A;
+  .userFullName {
+    font-weight: bold;
+    font-size: 25;
   }
   .logo {
     margin-bottom: 12;

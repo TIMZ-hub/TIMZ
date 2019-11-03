@@ -1,9 +1,14 @@
-<ActionBar title="{RR} Login Example">
-    <ActionItem text="Logout" ios.position="true" (tap)="logout()"></ActionItem>
+<ActionBar title="TIMZ" backgroundColor="rgb(192, 75, 74)">
+  <ActionItem text="Logout" ios.position="true" (tap)="logout()"></ActionItem>
 </ActionBar>
-<StackLayout>
-    <Label text="This is header section!" class="text-center"></Label>
-<GridLayout>
-  <Label text="This is your home page" class="text-center"></Label>
+<GridLayout backgroundColor="rgb(224, 224, 224)">
+    <ScrollView>
+        <StackLayout margin="10"  horizontalAlignment="center">
+            <Image src="res://profilepic" stretch="none"></Image>
+            <Label style="font-size: 25; font-weight: bold;" text="Gal Epshtein"></Label>
+            <Button text="New Group" class="newGroupBTN" style="background-color: rgb(236, 111, 111);" (tap)="onNewGroup()"></Button>
+            <Button text="Add Existing Group" class="newGroupBTN" style="background-color: rgb(236, 111, 111);" (tap)="onNewGroup()"></Button>
+            <Label style="font-size: 18; text-align: center; padding-top: 15" text="My Groups:"></Label>
+        </StackLayout>
+    </ScrollView>
 </GridLayout>
-</StackLayout>
