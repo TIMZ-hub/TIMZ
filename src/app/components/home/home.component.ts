@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
         // );    
         const options: ModalDialogOptions = {
             viewContainerRef: this.viewContainerRef,
-            fullscreen: false,
+            fullscreen: true,
             context: {}
         };
         this.modalService.showModal(ModalComponent, options);
