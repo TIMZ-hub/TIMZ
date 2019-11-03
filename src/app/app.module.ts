@@ -6,7 +6,9 @@ import { AppComponent } from "./app.component";
 import { FirebaseService } from "./services/firebase.service";
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
+import { MainComponent } from "./components/mainComponent/mainComponent";
 import { HomeComponent } from "./components/home/home.component";
+import { ModalComponent } from "./components/newGroupModal/newGroupModal";
 
 @NgModule({
     bootstrap: [
@@ -21,8 +23,14 @@ import { HomeComponent } from "./components/home/home.component";
         AppComponent,
         LoginComponent,
         RegisterComponent,
-        HomeComponent
+        HomeComponent,
+        MainComponent,
+        ModalComponent
     ],
+    exports: [
+        ModalComponent,
+    ],
+    entryComponents: [ModalComponent],
     providers: [FirebaseService],
     schemas: [
         NO_ERRORS_SCHEMA

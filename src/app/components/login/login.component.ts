@@ -15,6 +15,7 @@ import { SnackBar } from "nativescript-snackbar";
 const applicationSettings = require('tns-core-modules/application-settings');
 import {FirebaseService} from '../../services/firebase.service';
 import {User} from '../../models/user.model';
+import { Page } from "tns-core-modules/ui/page/page";
 @Component({
     moduleId: module.id,
     selector: "rr-login",
@@ -24,11 +25,13 @@ export class LoginComponent implements OnInit {
     isAuthenticating = false;
     public user: User;
 
-    public constructor(private router: RouterExtensions, private firebaseService: FirebaseService) {
-        this.user = {
-          "email":"",
-          "password":""
-        }
+    public constructor(private router: RouterExtensions, private firebaseService: FirebaseService, private page: Page) {
+      this.page.actionBarHidden = true; 
+      this.page.backgroundImage = "res://timz";
+      this.user = {
+        "email":"",
+        "password":""
+      }
     }
 
     public ngOnInit() {
@@ -43,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.isAuthenticating = true;
         applicationSettings.setBoolean("authenticated", true);
         this.router.navigate(["/home"], { clearHistory: true } );
-
+        // this.router.navigate(["/mainComponent"], { clearHistory: true });
       })
       .catch((message:any) => {
         this.isAuthenticating = false;
