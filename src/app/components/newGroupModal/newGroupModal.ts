@@ -40,6 +40,7 @@ export class ModalComponent implements OnInit {
     }
 
     public creatNewGroupToFirebase(name, maxPlayers, ownerID) {
+        const this_ = this;
         firebase.push(
             '/groups',
             {
@@ -47,10 +48,22 @@ export class ModalComponent implements OnInit {
               'maxMembers': maxPlayers,
               'ownerId': ownerID,
             }).then( function (result) {
-                if(result.key)
-                    alert('Group Created.');
+                if(result.key) {
+                    this_.addGroupToUser(ownerID, result.key);
+                    // alert('Group Created.');
+                }
             }
         );
+    }
+    public addGroupToUser(userID, groupID) {
+        firebase.setValue(
+            '/users/'+userID,
+            {
+                groupID: true
+            }
+        ).then( function (result) {
+            alert('added to suser.');
+        });
     }
 }
 
