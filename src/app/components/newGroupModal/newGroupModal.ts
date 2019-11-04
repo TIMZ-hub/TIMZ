@@ -56,10 +56,10 @@ export class ModalComponent implements OnInit {
         );
     }
     public addGroupToUser(userID, groupID) {
-        firebase.setValue(
+        firebase.update(
             '/users/'+userID,
             {
-                groupID: true
+                [groupID]: true
             }
         ).then( function (result) {
             alert('added to suser.');
