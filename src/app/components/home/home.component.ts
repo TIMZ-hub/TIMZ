@@ -17,12 +17,25 @@ export class HomeComponent implements OnInit {
     public constructor(private router: RouterExtensions, private firebaseService: FirebaseService,
         private viewContainerRef: ViewContainerRef, private modalService: ModalDialogService) { }
 
+    private userGroups = [];
+    private userID;
+
     public ngOnInit() {
         if(!applicationSettings.getBoolean("authenticated", false)) {
             this.router.navigate(["/login"], { clearHistory: true });
         }
-        // const userDetails = <any>this.firebaseService.getUserInfo();
-        // console.log(userDetails);
+        const this_ = this;
+        firebase.getCurrentUser().then(user => {
+          this.userID = user.uid
+          const ids = [];
+          firebase.getValue('/users/'+this.userID).then(result => {
+            Object.keys(result['value']).forEach(function(key) {
+                this_.updateGroupNameByID(key);
+              });
+          })
+          .catch(error => console.log("Error: " + error));
+    });
+
     }
 
     public logout() {
@@ -31,22 +44,25 @@ export class HomeComponent implements OnInit {
     }
     
     public onNewGroup(args) {
-        // const groupName = "test group name";
-        // const groupID = "r4r4r4r4r4r4r";
-        // const ownerID = "d5g5";
-        // firebase.setValue(
-        //     '/groups',
-        //     {foo:'bar'}
-        // ).then(function (result) {
-        //       alert("created fooo");
-        //     }
-        // );    
         const options: ModalDialogOptions = {
             viewContainerRef: this.viewContainerRef,
             fullscreen: true,
             context: {}
         };
         this.modalService.showModal(ModalComponent, options);
+    }
+
+    public updateGroupNameByID(groupId) {
+        const this_ = this;
+        firebase.getValue('/groups/'+groupId).then( result => {
+            const res = result['value']['name'];
+            this_.userGroups.push({key: groupId, name:res});
+            console.log(this_.userGroups);
+          })
+    }
+
+    public openGroup(groupID) {
+        alert(groupID);
     }
 
 }

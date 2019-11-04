@@ -50,7 +50,7 @@ export class ModalComponent implements OnInit {
             }).then( function (result) {
                 if(result.key) {
                     this_.addGroupToUser(ownerID, result.key);
-                    // alert('Group Created.');
+                    alert('Group Created.');
                 }
             }
         );
@@ -62,7 +62,7 @@ export class ModalComponent implements OnInit {
                 [groupID]: true
             }
         ).then( function (result) {
-            alert('added to suser.');
+            // alert('added to user.');
         });
     }
 }

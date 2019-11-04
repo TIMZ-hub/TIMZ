@@ -1,14 +1,15 @@
-<ActionBar title="TIMZ" backgroundColor="rgb(192, 75, 74)">
+<ActionBar title="TIMZ" backgroundColor="#FF4E4E">
   <ActionItem text="Logout" ios.position="true" (tap)="logout()"></ActionItem>
 </ActionBar>
 <GridLayout backgroundColor="rgb(224, 224, 224)">
     <ScrollView>
         <StackLayout margin="10"  horizontalAlignment="center">
-            <Image src="res://profilepic" stretch="none"></Image>
+            <Image src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
             <Label style="font-size: 25; font-weight: bold;" text="Gal Epshtein"></Label>
-            <Button text="New Group" class="newGroupBTN" style="background-color: rgb(236, 111, 111);" (tap)="onNewGroup()"></Button>
-            <Button text="Add Existing Group" class="newGroupBTN" style="background-color: rgb(236, 111, 111);" (tap)="onNewGroup()"></Button>
+            <Button text="New Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
+            <Button text="Join Existing Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
             <Label style="font-size: 18; text-align: center; padding-top: 15" text="My Groups:"></Label>
+            <Button *ngFor="let gr of this.userGroups" text="{{gr.name}}" style="background-color: rgb(255, 171, 123);" (tap)="openGroup(gr.key)"></Button>
         </StackLayout>
     </ScrollView>
 </GridLayout>
