@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit() {
         if(!applicationSettings.getBoolean("authenticated", false)) {
-            this.router.navigate(["/login"], { clearHistory: true });
+            this.router.navigate(["/login"], { clearHistory: false });
         }
         const this_ = this;
         firebase.getCurrentUser().then(user => {
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
     public logout() {
         applicationSettings.remove("authenticated");
-        this.router.navigate(["/login"], { clearHistory: true });
+        this.router.navigate(["/login"], { clearHistory: false });
     }
     
     public onNewGroup(args) {
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     }
 
     public openGroup(groupID, name) {
-        this.router.navigate(["/group-view"], { clearHistory: true, queryParams: {groupID: groupID, groupName: name}});
+        this.router.navigate(["/group-view"], { clearHistory: false, queryParams: {groupID: groupID, groupName: name, userID: this.userID}});
         // alert(groupID);
     }
 
