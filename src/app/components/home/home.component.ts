@@ -61,8 +61,9 @@ export class HomeComponent implements OnInit {
           })
     }
 
-    public openGroup(groupID) {
-        alert(groupID);
+    public openGroup(groupID, name) {
+        this.router.navigate(["/group-view"], { clearHistory: true, queryParams: {groupID: groupID, groupName: name}});
+        // alert(groupID);
     }
 
 }

@@ -9,6 +9,8 @@ import { RegisterComponent } from "./components/register/register.component";
 import { MainComponent } from "./components/mainComponent/mainComponent";
 import { HomeComponent } from "./components/home/home.component";
 import { ModalComponent } from "./components/newGroupModal/newGroupModal";
+import { GroupViewComponent } from './components/group-view/group-view.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
     bootstrap: [
@@ -25,7 +27,9 @@ import { ModalComponent } from "./components/newGroupModal/newGroupModal";
         RegisterComponent,
         HomeComponent,
         MainComponent,
-        ModalComponent
+        ModalComponent,
+        GroupViewComponent,
+        ChatComponent
     ],
     exports: [
         ModalComponent,

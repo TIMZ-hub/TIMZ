@@ -1,0 +1,21 @@
+<ActionBar title="TIMZ" backgroundColor="#FF4E4E">
+        <StackLayout orientation="horizontal"
+        ios:horizontalAlignment="center"
+        android:horizontalAlignment="center">
+        <Label text="{{this.groupName}}" style="font-size: 22; font-weight: bold;"></Label>
+      </StackLayout>
+        <!-- <Image src="res://profilepic" width="170px" height="170px" style="border-radius: 10%;"></Image> -->
+</ActionBar>
+<GridLayout backgroundColor="rgb(224, 224, 224)">
+    <ScrollView>
+        <StackLayout marginTop="10"  horizontalAlignment="center">
+            <Image src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
+            <Label text="Brings Ball: Aba Shelah" style="color:brown; font-size: 20; font-weight: bold;"></Label>
+            <StackLayout orientation="horizontal">
+                <button text="Members"></button>
+                <button text="Leave group"></button>
+            </StackLayout>
+            <ChatComponent width="70%" height="500px"></ChatComponent>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
