@@ -6,6 +6,7 @@ const firebase = require("nativescript-plugin-firebase");
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { ModalDialogOptions, ModalDialogService } from "nativescript-angular/modal-dialog";
 import { ModalComponent } from "../newGroupModal/newGroupModal";
+import { JoinGroupModalComponent } from "../join-group-modal/join-group-modal.component";
 
 @Component({
     moduleId: module.id,
@@ -50,6 +51,15 @@ export class HomeComponent implements OnInit {
             context: {}
         };
         this.modalService.showModal(ModalComponent, options);
+    }
+
+    public onJoinGroup(args) {
+        const options: ModalDialogOptions = {
+            viewContainerRef: this.viewContainerRef,
+            fullscreen: true,
+            context: {}
+        };
+        this.modalService.showModal(JoinGroupModalComponent, options);
     }
 
     public updateGroupNameByID(groupId) {
