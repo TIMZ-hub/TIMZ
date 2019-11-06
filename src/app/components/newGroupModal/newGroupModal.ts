@@ -3,6 +3,8 @@ import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { FirebaseService } from "~/app/services/firebase.service";
 import { Page } from "tns-core-modules/ui/page/page";
 const firebase = require("nativescript-plugin-firebase");
+import * as dialogs from "tns-core-modules/ui/dialogs";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +24,7 @@ export class ModalComponent implements OnInit {
     public gName= "";
     public maxN = 1;
 
-    constructor(private params: ModalDialogParams, private firebaseService: FirebaseService) {}
+    constructor(private params: ModalDialogParams, private firebaseService: FirebaseService, private router: RouterExtensions) {}
 
     ngOnInit() {}
 
@@ -50,7 +52,9 @@ export class ModalComponent implements OnInit {
             }).then( function (result) {
                 if(result.key) {
                     this_.addGroupToUser(ownerID, result.key);
-                    alert('Group Created.');
+                    dialogs.alert("Group Created.").then(()=> {
+
+                    });
                 }
             }
         );
@@ -64,6 +68,11 @@ export class ModalComponent implements OnInit {
         ).then( function (result) {
             // alert('added to user.');
         });
+    }
+
+    public openGroup(groupID, name) {
+        this.router.navigate(["/group-view"], { clearHistory: false, queryParams: {groupID: groupID, groupName: name}});
+        // alert(groupID);
     }
 }
 

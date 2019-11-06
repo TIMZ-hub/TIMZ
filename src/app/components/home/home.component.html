@@ -9,7 +9,7 @@
             <Button text="New Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
             <Button text="Join Existing Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
             <Label style="font-size: 18; text-align: center; padding-top: 15" text="My Groups:"></Label>
-            <Button *ngFor="let gr of this.userGroups" text="{{gr.name}}" style="background-color: rgb(255, 171, 123);" (tap)="openGroup(gr.key)"></Button>
+            <Button *ngFor="let gr of this.userGroups" text="{{gr.name}}" style="background-color: rgb(255, 171, 123);" (tap)="openGroup(gr.key, gr.name)"></Button>
         </StackLayout>
     </ScrollView>
 </GridLayout>
