@@ -11,6 +11,8 @@ import { HomeComponent } from "./components/home/home.component";
 import { ModalComponent } from "./components/newGroupModal/newGroupModal";
 import { GroupViewComponent } from './components/group-view/group-view.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { JoinGroupModalComponent } from "./components/join-group-modal/join-group-modal.component";
+
 
 @NgModule({
     bootstrap: [
@@ -29,12 +31,14 @@ import { ChatComponent } from './components/chat/chat.component';
         MainComponent,
         ModalComponent,
         GroupViewComponent,
-        ChatComponent
+        ChatComponent,
+        JoinGroupModalComponent
     ],
     exports: [
         ModalComponent,
+        JoinGroupModalComponent
     ],
-    entryComponents: [ModalComponent],
+    entryComponents: [ModalComponent, JoinGroupModalComponent],
     providers: [FirebaseService],
     schemas: [
         NO_ERRORS_SCHEMA
