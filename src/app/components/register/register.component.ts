@@ -18,6 +18,7 @@ export class RegisterComponent {
     public user: User;
     public list;
     private userProfilePicURI;
+    public userName: string;
 
     public constructor(private page: Page, private location: Location, private firebaseService: FirebaseService) {
 
@@ -52,6 +53,14 @@ export class RegisterComponent {
           this.isAuthenticating = false;
           const userID = JSON.parse(res as string)['uid'];
           this_.uploadProfilePicToFirebase(userID, this.userProfilePicURI);
+          firebase.update(
+            '/users/'+userID,
+            {
+                'name': [this_.userName]
+            }
+        ).then( function (result) {
+            // alert('updated user name.');
+        });
           this.location.back();
         //  this.toggleDisplay();
         })

@@ -61,7 +61,7 @@ export class ModalComponent implements OnInit {
     }
     public addGroupToUser(userID, groupID) {
         firebase.update(
-            '/users/'+userID,
+            '/users/'+userID+'/joinedGroups',
             {
                 [groupID]: true
             }

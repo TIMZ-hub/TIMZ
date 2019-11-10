@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
           this.userID = user.uid;
           this_.setUserPicture();
           const ids = [];
-          firebase.getValue('/users/'+this.userID).then(result => {
+          firebase.getValue('/users/'+this.userID+'/joinedGroups').then(result => {
             Object.keys(result['value']).forEach(function(key) {
                 this_.updateGroupNameByID(key);
               });

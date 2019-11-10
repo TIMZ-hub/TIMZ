@@ -28,7 +28,7 @@
   }
   .input {
     font-size: 18;
-    placeholder-color: #A8A8A8;
+    /* placeholder-color: #A8A8A8; */
   }
 
   .btn-primary {
@@ -49,4 +49,10 @@
   }
   .bold {
     color: #000000;
+  }
+  .scrollView{
+    background-image: url("res://timz.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
