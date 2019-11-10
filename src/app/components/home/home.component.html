@@ -3,9 +3,9 @@
 </ActionBar>
 <GridLayout backgroundColor="rgb(224, 224, 224)">
     <ScrollView>
-        <StackLayout margin="10"  horizontalAlignment="center">
-            <Image id="userPic" src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
-            <Label style="font-size: 25; font-weight: bold;" text="Gal Epshtein"></Label>
+        <StackLayout marginTop="10"  horizontalAlignment="center">
+            <Image id="userPic" stretch="aspectFill" src="res://profilepic"  width="50%" height="60%" style="border-radius: 40%;"></Image>
+            <Label style="font-size: 25; font-weight: bold;" text="Gal Epshtein" class="text-center"></Label>
             <Button text="New Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
             <Button text="Join Existing Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onJoinGroup()"></Button>
             <Label style="font-size: 18; text-align: center; padding-top: 15" text="My Groups:"></Label>
