@@ -7,6 +7,8 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 import { ModalDialogOptions, ModalDialogService } from "nativescript-angular/modal-dialog";
 import { ModalComponent } from "../newGroupModal/newGroupModal";
 import { JoinGroupModalComponent } from "../join-group-modal/join-group-modal.component";
+import { Page } from "tns-core-modules/ui/page/page";
+const fs = require("tns-core-modules/file-system");
 
 @Component({
     moduleId: module.id,
@@ -15,7 +17,7 @@ import { JoinGroupModalComponent } from "../join-group-modal/join-group-modal.co
 })
 export class HomeComponent implements OnInit {
 
-    public constructor(private router: RouterExtensions, private firebaseService: FirebaseService,
+    public constructor(private page: Page, private router: RouterExtensions, private firebaseService: FirebaseService,
         private viewContainerRef: ViewContainerRef, private modalService: ModalDialogService) { }
 
     private userGroups = [];
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit {
         }
         const this_ = this;
         firebase.getCurrentUser().then(user => {
-          this.userID = user.uid
+          this.userID = user.uid;
+          this_.setUserPicture();
           const ids = [];
           firebase.getValue('/users/'+this.userID).then(result => {
             Object.keys(result['value']).forEach(function(key) {
@@ -74,6 +77,27 @@ export class HomeComponent implements OnInit {
     public openGroup(groupID, name) {
         this.router.navigate(["/group-view"], { clearHistory: false, queryParams: {groupID: groupID, groupName: name, userID: this.userID}});
         // alert(groupID);
+    }
+
+    public setUserPicture() {
+        const this_ = this;
+        // let's first determine where we'll create the file using the 'file-system' module
+        const documents = fs.knownFolders.documents();
+        const logoPath = documents.path + "/myProfilePic.jpg";
+        const localLogoFile = documents.getFile("myProfilePic.jpg");
+        firebase.storage.downloadFile({
+          remoteFullPath: 'uploads/usersProfilePics/'+this.userID+'.jpg',
+          localFile: fs.File.fromPath(logoPath),
+        }).then(
+            function (uploadedFile) {
+              console.log("File downloaded to the requested location");
+              const Pview: any = this_.page.getViewById(`userPic`);
+              Pview.src = documents.path + '/myProfilePic.jpg';
+            },
+            function (error) {
+              console.log("File download error: " + error);
+            }
+        );
     }
 
 }
