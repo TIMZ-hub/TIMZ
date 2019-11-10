@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       this.page.backgroundImage = "res://timz";
       this.user = {
         "email":"",
-        "password":""
+        "password":"",
       }
     }
 

@@ -1,9 +1,11 @@
-        <ActionBar title="{RR} Login Example">
+        <ActionBar title="Register">
                 <NavigationButton text="Back" ios.position="left"></NavigationButton>
             </ActionBar>
             <GridLayout backgroundColor="#CCCCCC">
                 <ScrollView>
+
                     <StackLayout margin="10" verticalAlignment="center">
+                        <Image id="userPic" margin="10" src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
                         <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
                             <StackLayout class="input-field">
                                 <Label text="Email" class="label font-weight-bold m-b-5"></Label>
@@ -15,6 +17,7 @@
                                 <TextField secure="true" class="input" [(ngModel)]="user.password"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
+                            <Button class="btn btn-primary" text="Select Profile Picture" (tap)="selectProfilePicture()"></Button>
                             <Button class="btn btn-primary w-full" text="Register" (tap)="signUp()"></Button>
                         </StackLayout>
                     </StackLayout>
