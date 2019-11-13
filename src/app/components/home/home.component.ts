@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
 
     private userGroups = [];
     private userID;
+    private userName: string;
 
     public ngOnInit() {
         if(!applicationSettings.getBoolean("authenticated", false)) {
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
         const this_ = this;
         firebase.getCurrentUser().then(user => {
           this.userID = user.uid;
+          this.getUserName(this.userID);
           this_.setUserPicture();
           const ids = [];
           firebase.getValue('/users/'+this.userID+'/joinedGroups').then(result => {
@@ -77,6 +79,17 @@ export class HomeComponent implements OnInit {
     public openGroup(groupID, name) {
         this.router.navigate(["/group-view"], { clearHistory: false, queryParams: {groupID: groupID, groupName: name, userID: this.userID}});
         // alert(groupID);
+    }
+
+    public getUserName(uId) {
+        const this_ = this;
+        firebase.getValue('/users/'+uId+'/name').then( result => {
+            if (result) {
+                const name = result.value;
+                this_.userName = name;
+                (this_.page.getViewById('userName') as any).text = this_.userName;
+            }
+          })
     }
 
     public setUserPicture() {
