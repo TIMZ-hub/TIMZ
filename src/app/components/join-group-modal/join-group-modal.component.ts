@@ -19,6 +19,7 @@ export class JoinGroupModalComponent implements OnInit {
   }
 
   public addGroupToUser(groupID) {
+    const this_ = this;
     let userID = '';
     firebase.getValue('/groups/'+groupID)
     .then( result => {
@@ -29,6 +30,11 @@ export class JoinGroupModalComponent implements OnInit {
           firebase.update('/users/'+userID, {[groupID]: true}).then( function (result) {
           // alert('added to user.');
           });
+          firebase.update('/groups/'+result.value+'/users', {[userID]: true}).then( function (result) {
+            // alert('added to user.');
+          });
+          this_.addUserToGroup(userID, groupID);
+          this_.close();
         })
       } else {
         alert('Group does not exists.')
@@ -37,4 +43,14 @@ export class JoinGroupModalComponent implements OnInit {
     }) .catch(error => console.log("Error: " + error));
   }
 
+  public addUserToGroup(userID, groupID) {
+    firebase.update(
+        '/groups/'+groupID+'/users',
+        {
+            [userID]: true
+        }
+    ).then( function (result) {
+        // alert('added user to group.');
+    });
+}
 }

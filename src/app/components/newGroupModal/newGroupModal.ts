@@ -52,8 +52,9 @@ export class ModalComponent implements OnInit {
             }).then( function (result) {
                 if(result.key) {
                     this_.addGroupToUser(ownerID, result.key);
+                    this_.addUserToGroup(ownerID, result.key)
                     dialogs.alert("Group Created.").then(()=> {
-
+                        this_.close();
                     });
                 }
             }
@@ -67,6 +68,17 @@ export class ModalComponent implements OnInit {
             }
         ).then( function (result) {
             // alert('added to user.');
+        });
+    }
+
+    public addUserToGroup(userID, groupID) {
+        firebase.update(
+            '/groups/'+groupID+'/users',
+            {
+                [userID]: true
+            }
+        ).then( function (result) {
+            // alert('added user to group.');
         });
     }
 

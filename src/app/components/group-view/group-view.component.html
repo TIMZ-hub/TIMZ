@@ -12,7 +12,7 @@
             <Image src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
             <Label text="Brings Ball: Aba Shelah" style="color:brown; font-size: 20; font-weight: bold;"></Label>
             <StackLayout orientation="horizontal">
-                <button text="Members" ></button>
+                <button text="Members" (tap)="openGroupMembers()"></button>
                 <button text="Leave group" (tap)="openLeaveGroupDialog()"></button>
             </StackLayout>
             <StackLayout>
