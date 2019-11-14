@@ -29,11 +29,12 @@ export class GroupMembersComponent implements OnInit {
     const this_ = this;
     firebase.getValue('groups/'+this_.groupID+'/users').then( result => {
       if (result && result.value) {
-        for (const member of result.getValue()) {
-          if (member.value === true)
-            this_.groupMembers.push(member.value);
-        }
-        // console.log(result);
+        Object.keys(result.value).forEach(key => {
+          const value = result.value[key];
+          if (value === true)
+            this_.groupMembers.push(key);
+          }
+      );
       }
     })
   }

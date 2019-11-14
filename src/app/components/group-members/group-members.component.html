@@ -1,1 +1,4 @@
-<Button text="group-members works!" class="btn btn-primary"></Button>
+<StackLayout marginTop="10"  horizontalAlignment="center">
+    <Label marginTop="5" *ngFor="let uid of this.groupMembers" text="{{uid}}"></Label>
+</StackLayout>
+        
