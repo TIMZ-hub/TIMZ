@@ -10,7 +10,7 @@ import { RouterExtensions } from "nativescript-angular/router";
     moduleId: module.id,
     selector: "modal",
     template: `
-        <StackLayout>
+        <StackLayout margin="30">
             <Label text="Create New Group" style="font-weight: bold;"></Label>
             <TextField id="gName" [(ngModel)]="gName" style="padding-top: 30" hint="Group Name"></TextField>
             <TextField id="maxN" [(ngModel)]="maxN" keyboardType="number" style="padding-top: 32" hint="Max Members"></TextField>

@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
     public onJoinGroup(args) {
         const options: ModalDialogOptions = {
             viewContainerRef: this.viewContainerRef,
-            fullscreen: true,
+            fullscreen: false,
             context: {}
         };
         this.modalService.showModal(JoinGroupModalComponent, options).then(() => {

@@ -6,6 +6,8 @@ import { ChatComponent } from '../chat/chat.component';
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { goBack } from 'tns-core-modules/ui/frame/frame';
 const firebase = require("nativescript-plugin-firebase");
+import * as imagepicker from "nativescript-imagepicker";
+import { Page } from 'tns-core-modules/ui/page/page';
 
 @Component({
   selector: 'ns-group-view',
@@ -17,8 +19,9 @@ export class GroupViewComponent implements OnInit {
   private groupName;
   private groupID;
   private userID;
+  private groupPic;
 
-  constructor(private router: RouterExtensions, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
+  constructor(private page: Page, private router: RouterExtensions, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -50,6 +53,24 @@ export class GroupViewComponent implements OnInit {
   openGroupMembers() {
     const this_ = this;
     this.router.navigate(["/group-members"], { clearHistory: false, queryParams: {groupID: this_.groupID}});
+  }
+
+  public selectProfilePicture() {
+    const this_ = this;
+    const context = imagepicker.create({ mode: "single"});
+    context.authorize().then(function() {
+    return context.present();
+    }).then(function(selection) {
+    selection.forEach(function(selected) {
+        // process the selected image
+        if (selected.android) {
+          const Pview: any = this_.page.getViewById(`groupProfilePic`);
+          Pview.src = selected.android;
+          this_.groupPic = selected.android;
+        }
+    });
+    this.list = selection;
+    }).catch(function (e) {});
   }
 
 }

@@ -1,5 +1,5 @@
-<StackLayout>
-    <TextField id="groupID" [(ngModel)]="groupID" style="padding-top: 30" hint="Group ID"></TextField>
+<StackLayout margin="30">
+    <TextField id="groupID" width="80%" [(ngModel)]="groupID" style="padding-top: 30" hint="Group ID"></TextField>
     <Button text="Join" (tap)="addGroupToUser(groupID)"></Button>
     <Button text="Cancel" (tap)="close()"></Button>
 </StackLayout>
