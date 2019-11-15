@@ -55,16 +55,20 @@ export class HomeComponent implements OnInit {
             fullscreen: true,
             context: {}
         };
-        this.modalService.showModal(ModalComponent, options);
+        this.modalService.showModal(ModalComponent, options).then( result => {
+            this.router.navigate(["/home1"], { clearHistory: true });
+        });
     }
 
     public onJoinGroup(args) {
         const options: ModalDialogOptions = {
             viewContainerRef: this.viewContainerRef,
-            fullscreen: true,
+            fullscreen: false,
             context: {}
         };
-        this.modalService.showModal(JoinGroupModalComponent, options);
+        this.modalService.showModal(JoinGroupModalComponent, options).then(() => {
+            this.router.navigate(["/home1"], { clearHistory: true });
+        });
     }
 
     public updateGroupNameByID(groupId) {

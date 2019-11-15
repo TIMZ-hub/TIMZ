@@ -19,6 +19,7 @@ export class JoinGroupModalComponent implements OnInit {
   }
 
   public addGroupToUser(groupID) {
+    const this_ = this;
     let userID = '';
     firebase.getValue('/groups/'+groupID)
     .then( result => {
@@ -26,9 +27,8 @@ export class JoinGroupModalComponent implements OnInit {
       if (isGroupExists) {
         firebase.getCurrentUser().then(user => {
           userID = user.uid
-          firebase.update('/users/'+userID, {[groupID]: true}).then( function (result) {
-          // alert('added to user.');
-          });
+          firebase.update('/users/'+userID+'/joinedGroups', {[groupID]: true});
+          firebase.update('/groups/'+groupID+'/users', {[userID]: true});
         })
       } else {
         alert('Group does not exists.')
@@ -36,5 +36,6 @@ export class JoinGroupModalComponent implements OnInit {
 
     }) .catch(error => console.log("Error: " + error));
   }
+
 
 }

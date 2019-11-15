@@ -12,6 +12,7 @@ import { ModalComponent } from "./components/newGroupModal/newGroupModal";
 import { GroupViewComponent } from './components/group-view/group-view.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { JoinGroupModalComponent } from "./components/join-group-modal/join-group-modal.component";
+import { GroupMembersComponent } from './components/group-members/group-members.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { JoinGroupModalComponent } from "./components/join-group-modal/join-grou
         ModalComponent,
         GroupViewComponent,
         ChatComponent,
-        JoinGroupModalComponent
+        JoinGroupModalComponent,
+        GroupMembersComponent
     ],
     exports: [
         ModalComponent,

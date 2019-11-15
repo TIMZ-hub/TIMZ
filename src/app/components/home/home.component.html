@@ -6,8 +6,10 @@
         <StackLayout marginTop="10"  horizontalAlignment="center">
             <Image id="userPic" stretch="aspectFill" src="res://profilepic"  width="50%" height="60%" style="border-radius: 40%;"></Image>
             <Label id="userName" style="font-size: 25; font-weight: bold;" text="{{userName}}" class="text-center"></Label>
-            <Button text="New Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>
-            <Button text="Join Existing Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onJoinGroup()"></Button>
+            <StackLayout orientation="horizontal"> 
+                <Button text="Join Existing Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onJoinGroup()"></Button>  
+                <Button text="New Group" class="newGroupBTN" style="background-color: #FF7C7C;" (tap)="onNewGroup()"></Button>  
+            </StackLayout>
             <Label style="font-size: 18; text-align: center; padding-top: 15" text="My Groups:"></Label>
             <Button *ngFor="let gr of this.userGroups" text="{{gr.name}}" style="background-color: rgb(255, 171, 123);" (tap)="openGroup(gr.key, gr.name)"></Button>
         </StackLayout>

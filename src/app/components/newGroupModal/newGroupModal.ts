@@ -10,7 +10,7 @@ import { RouterExtensions } from "nativescript-angular/router";
     moduleId: module.id,
     selector: "modal",
     template: `
-        <StackLayout>
+        <StackLayout margin="30">
             <Label text="Create New Group" style="font-weight: bold;"></Label>
             <TextField id="gName" [(ngModel)]="gName" style="padding-top: 30" hint="Group Name"></TextField>
             <TextField id="maxN" [(ngModel)]="maxN" keyboardType="number" style="padding-top: 32" hint="Max Members"></TextField>
@@ -52,8 +52,9 @@ export class ModalComponent implements OnInit {
             }).then( function (result) {
                 if(result.key) {
                     this_.addGroupToUser(ownerID, result.key);
+                    this_.addUserToGroup(ownerID, result.key)
                     dialogs.alert("Group Created.").then(()=> {
-
+                        this_.close();
                     });
                 }
             }
@@ -67,6 +68,17 @@ export class ModalComponent implements OnInit {
             }
         ).then( function (result) {
             // alert('added to user.');
+        });
+    }
+
+    public addUserToGroup(userID, groupID) {
+        firebase.update(
+            '/groups/'+groupID+'/users',
+            {
+                [userID]: true
+            }
+        ).then( function (result) {
+            // alert('added user to group.');
         });
     }
 

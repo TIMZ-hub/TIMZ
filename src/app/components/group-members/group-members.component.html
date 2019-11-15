@@ -1,0 +1,8 @@
+
+<StackLayout marginTop="10"  horizontalAlignment="center">
+    <StackLayout orientation="horizontal" margin="2" class="memberItem" *ngFor="let memb of this.groupMembers" (tap)= "toggleBallBringer(memb)" (longPress)="onMemberLongPress(memb.id, memb.name)" width="100%" horizontalAlignment="center" style="background-color: tomato;">
+        <Image src="res://owner" width="8%" *ngIf="isGroupOwner(memb.id)"></Image> 
+        <Label margin="5" text="{{memb.name}}" horizontalAlignment="center" style="font-size: 25; font-weight: bold;"></Label>
+        <Image src="res://ball" width="8%" *ngIf="memb.isBallBringer"></Image> 
+    </StackLayout >
+</StackLayout>

@@ -8,15 +8,17 @@
 </ActionBar>
 <GridLayout backgroundColor="rgb(224, 224, 224)">
     <ScrollView>
-        <StackLayout marginTop="10"  horizontalAlignment="center">
-            <Image src="res://profilepic"  width="30%" height="30%" style="border-radius: 40%;"></Image>
-            <Label text="Brings Ball: Aba Shelah" style="color:brown; font-size: 20; font-weight: bold;"></Label>
-            <StackLayout orientation="horizontal">
-                <button text="Members" ></button>
+        <StackLayout marginTop="10" orientation="vertical" horizontalAlignment="center">
+            <Image src="res://profilepic" id="groupProfilePic" (tap)="selectProfilePicture()" width="30%" height="30%" style="border-radius: 40%;"></Image>
+            <!-- <Label text="Brings Ball: Aba Shelah" style="color:brown; font-size: 20; font-weight: bold;"></Label> -->
+            <StackLayout width="100% "orientation="horizontal" horizontalAlignment="center">
+                <button text="Members" (tap)="openGroupMembers()"></button>
                 <button text="Leave group" (tap)="openLeaveGroupDialog()"></button>
             </StackLayout>
-            <StackLayout>
-                    <ChatComponent width="70%" height="500px"></ChatComponent>
+            <StackLayout horizontalAlignment="center" verticalAlignment="center" height="1450px" style="background-color: tomato;">
+                <Label text="Chat" class="text-center" width="100%" style="font-size: 140; font-weight: bold;"></Label>
+                <Label text="*Under Construction" class="text-center" width="100%" style="font-size: 20; font-weight: bold;"></Label>
+                <!-- <ChatComponent width="70%" height="500px"></ChatComponent> -->
             </StackLayout>
         </StackLayout>
     </ScrollView>
