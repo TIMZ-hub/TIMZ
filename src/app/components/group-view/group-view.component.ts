@@ -45,7 +45,7 @@ export class GroupViewComponent implements OnInit {
   }
 
   leaveGroup() {
-    firebase.remove("/users/"+ this.userID + '/'+ this.groupID);
+    firebase.remove("/users/"+ this.userID + '/joinedGroups/'+ this.groupID);
     firebase.remove("/groups/"+ this.groupID + '/users/'+ this.userID);
     this.router.navigate(["/home"], { clearHistory: true });
   }
