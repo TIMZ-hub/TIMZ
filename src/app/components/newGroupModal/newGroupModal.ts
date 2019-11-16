@@ -23,6 +23,7 @@ export class ModalComponent implements OnInit {
 
     public gName= "";
     public maxN = 1;
+    public groupCategory
 
     constructor(private params: ModalDialogParams, private firebaseService: FirebaseService, private router: RouterExtensions) {}
 
