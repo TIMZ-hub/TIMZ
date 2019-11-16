@@ -40,7 +40,6 @@ export class FirebaseService {
   }
 
   uploadUserProfilePicToFirebase(userID, filePath) {
-    const this_ = this;
     firebase.storage.uploadFile({
       // the full path of the file in your Firebase storage (folders will be created)
       remoteFullPath: 'uploads/usersProfilePics/'+userID+'.jpg',
@@ -119,4 +118,22 @@ export class FirebaseService {
     return firebase.update('/users/'+userID, {'name': userName} );
   }
 
+  uploadGroupProfilePicToFirebase(groupID, filePath) {
+    const this_ = this;
+    firebase.storage.uploadFile({
+      remoteFullPath: 'uploads/groupsProfilePics/'+groupID+'.jpg',
+      localFile: fs.File.fromPath(filePath),
+      onProgress: function(status) {
+        console.log("Uploaded fraction: " + status.fractionCompleted);
+        console.log("Percentage complete: " + status.percentageCompleted);
+      }
+    }).then(
+        function (uploadedFile) {
+          console.log("File uploaded: " + JSON.stringify(uploadedFile));
+        },
+        function (error) {
+          console.log("File upload error: " + error);
+        }
+    );
+  }
 }

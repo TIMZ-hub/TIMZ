@@ -8,6 +8,7 @@ import { goBack } from 'tns-core-modules/ui/frame/frame';
 const firebase = require("nativescript-plugin-firebase");
 import * as imagepicker from "nativescript-imagepicker";
 import { Page } from 'tns-core-modules/ui/page/page';
+const fs = require("tns-core-modules/file-system");
 
 @Component({
   selector: 'ns-group-view',
@@ -24,10 +25,12 @@ export class GroupViewComponent implements OnInit {
   constructor(private page: Page, private router: RouterExtensions, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const this_ = this;
     this.route.queryParams.subscribe(params => {
-      this.groupID = params.groupID;
-      this.groupName = params.groupName;
-      this.userID = params.userID;
+      this_.groupID = params.groupID;
+      this_.groupName = params.groupName;
+      this_.userID = params.userID;
+      this_.setGroupPicture();
     });
   }
 
@@ -43,6 +46,25 @@ export class GroupViewComponent implements OnInit {
         this_.leaveGroup();
     });
   }
+
+  public setGroupPicture() {
+    const this_ = this;
+    // let's first determine where we'll create the file using the 'file-system' module
+    const documents = fs.knownFolders.documents();
+    const logoPath = documents.path + "/myGroupProfilePic.jpg";
+    const localLogoFile = documents.getFile("myGroupProfilePic.jpg");
+    const remotePath = 'uploads/groupsProfilePics/'+this.groupID+'.jpg';
+    this.firebaseService.downloadFile(remotePath, fs.File.fromPath(logoPath)).then(
+        function (uploadedFile) {
+          console.log("File downloaded to the requested location");
+          const Pview: any = this_.page.getViewById(`groupProfilePic`);
+          Pview.src = documents.path + '/myGroupProfilePic.jpg';
+        },
+        function (error) {
+          console.log("File download error: " + error);
+        }
+    );
+}
 
   leaveGroup() {
     this.firebaseService.leaveGroup(this.userID, this.groupID);
@@ -66,6 +88,7 @@ export class GroupViewComponent implements OnInit {
           const Pview: any = this_.page.getViewById(`groupProfilePic`);
           Pview.src = selected.android;
           this_.groupPicURI = selected.android;
+          this_.firebaseService.uploadGroupProfilePicToFirebase(this_.groupID,  this_.groupPicURI)
         }
     });
     this.list = selection;
