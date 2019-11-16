@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular/modal-dialog';
+import { FirebaseService } from '~/app/services/firebase.service';
 const firebase = require("nativescript-plugin-firebase");
 
 @Component({
@@ -9,7 +10,7 @@ const firebase = require("nativescript-plugin-firebase");
 })
 export class JoinGroupModalComponent implements OnInit {
 
-  constructor(private params: ModalDialogParams) { }
+  constructor(private params: ModalDialogParams, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
   }
@@ -21,14 +22,13 @@ export class JoinGroupModalComponent implements OnInit {
   public addGroupToUser(groupID) {
     const this_ = this;
     let userID = '';
-    firebase.getValue('/groups/'+groupID)
-    .then( result => {
+    this.firebaseService.getGroupData(groupID).then( result => {
       const isGroupExists = result.value;
       if (isGroupExists) {
-        firebase.getCurrentUser().then(user => {
-          userID = user.uid
-          firebase.update('/users/'+userID+'/joinedGroups', {[groupID]: true});
-          firebase.update('/groups/'+groupID+'/users', {[userID]: true});
+        this.firebaseService.getCurrentUser().then(user => {
+          userID = user.uid;
+          this.firebaseService.addGroupToUserJoinedGroups(userID, groupID);
+          this.firebaseService.addUserToGroupMembers(userID, groupID);
         })
       } else {
         alert('Group does not exists.')

@@ -19,7 +19,7 @@ export class GroupViewComponent implements OnInit {
   private groupName;
   private groupID;
   private userID;
-  private groupPic;
+  private groupPicURI;
 
   constructor(private page: Page, private router: RouterExtensions, private firebaseService: FirebaseService, private route: ActivatedRoute) { }
 
@@ -45,8 +45,7 @@ export class GroupViewComponent implements OnInit {
   }
 
   leaveGroup() {
-    firebase.remove("/users/"+ this.userID + '/joinedGroups/'+ this.groupID);
-    firebase.remove("/groups/"+ this.groupID + '/users/'+ this.userID);
+    this.firebaseService.leaveGroup(this.userID, this.groupID);
     this.router.navigate(["/home"], { clearHistory: true });
   }
 
@@ -66,7 +65,7 @@ export class GroupViewComponent implements OnInit {
         if (selected.android) {
           const Pview: any = this_.page.getViewById(`groupProfilePic`);
           Pview.src = selected.android;
-          this_.groupPic = selected.android;
+          this_.groupPicURI = selected.android;
         }
     });
     this.list = selection;
