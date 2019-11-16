@@ -29,12 +29,12 @@ export class HomeComponent implements OnInit {
             this.router.navigate(["/login"], { clearHistory: false });
         }
         const this_ = this;
-        firebase.getCurrentUser().then(user => {
+        this.firebaseService.getCurrentUser().then(user => {
           this.userID = user.uid;
           this.getUserName(this.userID);
           this_.setUserPicture();
           const ids = [];
-          firebase.getValue('/users/'+this.userID+'/joinedGroups').then(result => {
+          this.firebaseService.getUserGroups(this.userID).then(result => {
             Object.keys(result['value']).forEach(function(key) {
                 this_.updateGroupNameByID(key);
               });
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
 
     public updateGroupNameByID(groupId) {
         const this_ = this;
-        firebase.getValue('/groups/'+groupId).then( result => {
+        this.firebaseService.getGroupData(groupId).then( result => {
             const res = result['value']['name'];
             this_.userGroups.push({key: groupId, name:res});
             console.log(this_.userGroups);
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
 
     public getUserName(uId) {
         const this_ = this;
-        firebase.getValue('/users/'+uId+'/name').then( result => {
+        this.firebaseService.getUserNameByUserID(uId).then( result => {
             if (result) {
                 const name = result.value;
                 this_.userName = name;
@@ -102,10 +102,8 @@ export class HomeComponent implements OnInit {
         const documents = fs.knownFolders.documents();
         const logoPath = documents.path + "/myProfilePic.jpg";
         const localLogoFile = documents.getFile("myProfilePic.jpg");
-        firebase.storage.downloadFile({
-          remoteFullPath: 'uploads/usersProfilePics/'+this.userID+'.jpg',
-          localFile: fs.File.fromPath(logoPath),
-        }).then(
+        const remotePath = 'uploads/usersProfilePics/'+this.userID+'.jpg';
+        this.firebaseService.downloadFile(remotePath, fs.File.fromPath(logoPath)).then(
             function (uploadedFile) {
               console.log("File downloaded to the requested location");
               const Pview: any = this_.page.getViewById(`userPic`);

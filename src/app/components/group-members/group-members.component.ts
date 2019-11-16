@@ -29,7 +29,7 @@ export class GroupMembersComponent implements OnInit {
   }
   getGroupOwnerID() {
     const this_ = this;
-    firebase.getValue('groups/'+this_.groupID+'/ownerId').then( result => {
+    this.firebaseService.getGroupOwnerId(this_.groupID).then(result => {
       if (result && result.value)
         this_.groupOwnerID = result.value;
     })
@@ -48,12 +48,12 @@ export class GroupMembersComponent implements OnInit {
 
   getGroupMembers() {
     const this_ = this;
-    firebase.getValue('groups/'+this_.groupID+'/users').then( result => {
+    this.firebaseService.getGroupMembers(this_.groupID).then( result => {
       if (result && result.value) {
         Object.keys(result.value).forEach(key => {
           const value = result.value[key];
           if (value === true) {
-              firebase.getValue('/users/'+key+'/name').then( result2 => {
+              this.firebaseService.getUserNameByUserID(key).then( result2 => {
                   if (result) {
                       const name = result2.value;
                       this_.groupMembers.push({id: key, name: name, isBallBringer: false});

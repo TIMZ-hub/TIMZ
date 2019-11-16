@@ -51,8 +51,7 @@ export class ModalComponent implements OnInit {
 
     public createNewGroup() {
         let ownerID = '';
-        firebase.getCurrentUser()
-      .then(user => {
+        this.firebaseService.getCurrentUser().then(user => {
         ownerID = user.uid
         this.creatNewGroupToFirebase(this.gName, this.maxN, ownerID);
       })
@@ -60,14 +59,7 @@ export class ModalComponent implements OnInit {
 
     public creatNewGroupToFirebase(name, maxPlayers, ownerID) {
         const this_ = this;
-        firebase.push(
-            '/groups',
-            {
-              'name': name,
-              'maxMembers': maxPlayers,
-              'ownerId': ownerID,
-              'groupCategory': this_.groupCategory,
-            }).then( function (result) {
+        this.firebaseService.createNewGroup(name, maxPlayers, ownerID, this_.groupCategory).then( function (result) {
                 if(result.key) {
                     this_.addGroupToUser(ownerID, result.key);
                     this_.addUserToGroup(ownerID, result.key)
@@ -79,23 +71,15 @@ export class ModalComponent implements OnInit {
         );
     }
     public addGroupToUser(userID, groupID) {
-        firebase.update(
-            '/users/'+userID+'/joinedGroups',
-            {
-                [groupID]: true
-            }
-        ).then( function (result) {
+        this.firebaseService.addGroupToUserJoinedGroups(userID, groupID).then(
+            function (result) {
             // alert('added to user.');
         });
     }
 
     public addUserToGroup(userID, groupID) {
-        firebase.update(
-            '/groups/'+groupID+'/users',
-            {
-                [userID]: true
-            }
-        ).then( function (result) {
+        this.firebaseService.addUserToGroupMembers(userID, groupID).then( 
+            function (result) {
             // alert('added user to group.');
         });
     }

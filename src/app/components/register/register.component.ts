@@ -6,7 +6,6 @@ import * as imagepicker from "nativescript-imagepicker";
 import { Page } from "tns-core-modules/ui/page/page";
 const imageSourceModule = require(`tns-core-modules/image-source`);
 const firebase = require("nativescript-plugin-firebase");
-const fs = require("tns-core-modules/file-system");
 
 @Component({
     moduleId: module.id,
@@ -52,10 +51,9 @@ export class RegisterComponent {
         .then((res) => {
           this.isAuthenticating = false;
           const userID = JSON.parse(res as string)['uid'];
-          this_.uploadProfilePicToFirebase(userID, this.userProfilePicURI);
-          firebase.update('/users/'+userID,
-            {'name': this_.userName} ).then( function (result) {
-            // alert('updated user name.');
+          this_.firebaseService.uploadUserProfilePicToFirebase(userID, this.userProfilePicURI);
+          this.firebaseService.setUserName(userID, this_.userName).then( function (result) {
+            // alert('updated user's name.');
         });
           this.location.back();
         //  this.toggleDisplay();
@@ -66,26 +64,5 @@ export class RegisterComponent {
         });
 }
 
-  uploadProfilePicToFirebase(userID, filePath) {
-    const this_ = this;
-    firebase.storage.uploadFile({
-      // the full path of the file in your Firebase storage (folders will be created)
-      remoteFullPath: 'uploads/usersProfilePics/'+userID+'.jpg',
-      // option 1: a file-system module File object
-      localFile: fs.File.fromPath(filePath),
-      // get notified of file upload progress
-      onProgress: function(status) {
-        console.log("Uploaded fraction: " + status.fractionCompleted);
-        console.log("Percentage complete: " + status.percentageCompleted);
-      }
-    }).then(
-        function (uploadedFile) {
-          console.log("File uploaded: " + JSON.stringify(uploadedFile));
-        },
-        function (error) {
-          console.log("File upload error: " + error);
-        }
-    );
-  }
 
 }
