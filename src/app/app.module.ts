@@ -13,7 +13,7 @@ import { GroupViewComponent } from './components/group-view/group-view.component
 import { ChatComponent } from './components/chat/chat.component';
 import { JoinGroupModalComponent } from "./components/join-group-modal/join-group-modal.component";
 import { GroupMembersComponent } from './components/group-members/group-members.component';
-
+import { DropDownModule } from "nativescript-drop-down/angular";
 
 @NgModule({
     bootstrap: [
@@ -22,7 +22,8 @@ import { GroupMembersComponent } from './components/group-members/group-members.
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        DropDownModule,
     ],
     declarations: [
         AppComponent,
